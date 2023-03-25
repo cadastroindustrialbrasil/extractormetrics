@@ -27,7 +27,9 @@ sequelize.authenticate().then(() => { }).catch(err => {
 
 async function app() {
     try {
+        api.get('/', async(req, res) => {
 
+            
         var getEmails = await sequelize.query("SELECT id FROM `emails`", {
             type: QueryTypes.SELECT
         });
@@ -38,9 +40,8 @@ async function app() {
 
         var consultas = await sequelize.query("SELECT * FROM `consultas` WHERE status = 1", {
             type: QueryTypes.SELECT
-        });        
+        });       
 
-        api.get('/', (req, res) => {
             res.send({
                 "total-emails":getEmails.length,
                 "total-consultas":totalConsultas.length,
